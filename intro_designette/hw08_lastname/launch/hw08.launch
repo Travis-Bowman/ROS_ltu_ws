@@ -1,0 +1,26 @@
+<launch>
+
+  <!-- Load map -->
+  <param name="map_dir" value="$(find gazelle_sim_line_course)/map" />
+  <rosparam command="load"
+            file="$(find gazelle_sim_line_course)/map/line_course.yaml" />
+
+  <!-- Load robot -->
+  <rosparam command="load"
+            file="$(find gazelle_sim)/robot/basic_differential_circ.yaml" />
+
+
+  <!-- Gazelle Sim -->
+  <include file="$(find gazelle_sim)/launch/gazelle_sim.launch">
+    <arg name="show_rviz" value="false" />
+    <arg name="show_steering" default="false" />
+    <arg name="show_image_view" default="true" />
+    <arg name="show_dynamic_reconfigure" default="true" />
+  </include>
+
+   <!-- Launch line following node -->
+   
+  <node name="line_follow_node" pkg="hw08_lastname" type="line_follow.py" output="screen">
+  </node>
+ 
+</launch>
